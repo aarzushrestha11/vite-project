@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import Chatbot from "../assets/Chatbot.png"
+import Chatbot from "../assets/Chatbot.png";
 export default function AboutPage() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/about/")
+    fetch(`${BACKEND_URL}about/`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched sections:", data);
@@ -14,12 +15,12 @@ export default function AboutPage() {
   }, []);
 
   // Filter sections based on their type or any criteria
-  const firstSectionCards = sections.filter(section => 
-    ['VISION'].includes(section.section_type)
+  const firstSectionCards = sections.filter((section) =>
+    ["VISION"].includes(section.section_type),
   );
-  
-  const secondSectionCards = sections.filter(section => 
-    ['WHY'].includes(section.section_type)
+
+  const secondSectionCards = sections.filter((section) =>
+    ["WHY"].includes(section.section_type),
   );
 
   // Static project cards
@@ -29,9 +30,12 @@ export default function AboutPage() {
       title: "ChatNHS",
       description: "Data Analysis and Real-time chat",
       image: Chatbot,
-      extra_info: ["Customer Support Bots", "Website Integration", "Multi-platform"],
+      extra_info: [
+        "Customer Support Bots",
+        "Website Integration",
+        "Multi-platform",
+      ],
     },
-    
   ];
 
   const renderCards = (cards) => (
