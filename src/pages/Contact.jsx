@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import contactHeroImage from "../assets/contactHeroImage.png";
 
 const Contact = () => {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +20,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/contact/", {
+      const response = await fetch(`${BACKEND_URL}contact/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
