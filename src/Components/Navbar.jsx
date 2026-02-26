@@ -38,14 +38,15 @@ const Navbar = () => {
       const scrolled = scrollY > 100;
       setIsScrolled(scrolled);
 
+      let newWidth = 100;
       if (scrolled) {
         const adjustedScroll = Math.min(scrollY - 100, 300);
         let percentage = 100 - (adjustedScroll / 300) * 20;
         percentage = Math.max(80, Math.min(100, percentage));
-        setContainerWidth(Number(percentage.toFixed(2)));
-      } else {
-        setContainerWidth(100);
+        newWidth = Math.round(percentage); // Round to prevent wobble
       }
+
+      if (newWidth !== containerWidth) setContainerWidth(newWidth);
 
       ticking.current = false;
     };
@@ -61,7 +62,7 @@ const Navbar = () => {
     updateNavbar();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [containerWidth]);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-gradient-to-br from-indigo-900 via-black to-purple-900">
@@ -69,9 +70,8 @@ const Navbar = () => {
         <div
           style={{
             width: `${containerWidth}%`,
-            transition: "width 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: "width 0.3s ease", // only width
           }}
-          className="transition-all duration-500"
         >
           <div
             className={`transition-all duration-500 ${
@@ -81,7 +81,6 @@ const Navbar = () => {
             }`}
           >
             <div className="flex items-center justify-between gap-4 transition-all duration-500">
-              
               {/* Logo */}
               <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
                 <div
@@ -114,7 +113,7 @@ const Navbar = () => {
                 </div>
               </Link>
 
-              {/* Desktop Links (ONLY large screens now) */}
+              {/* Desktop Links */}
               <div
                 className={`hidden lg:flex items-center ${
                   isScrolled ? "space-x-4" : "space-x-6"
@@ -168,7 +167,7 @@ const Navbar = () => {
                 </a>
               </div>
 
-              {/* Mobile Toggle (below lg) */}
+              {/* Mobile Toggle */}
               <button
                 onClick={toggleMenu}
                 className="lg:hidden text-white w-10 h-10 flex items-center justify-center"
@@ -202,7 +201,6 @@ const Navbar = () => {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>
