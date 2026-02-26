@@ -11,13 +11,19 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(""); // For inline messages
+  const [statusType, setStatusType] = useState(""); // "success" or "error"
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatusMessage("");
+    setStatusType("");
 
     try {
       const response = await fetch(`${BACKEND_URL}contact/`, {
@@ -26,14 +32,20 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to send message");
+        console.error("Backend error:", data);
+        throw new Error(data.error || "Failed to send message");
       }
 
-      alert("Message sent successfully!");
+      setStatusMessage(data.message || "Message sent successfully!");
+      setStatusType("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
+
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      setStatusMessage(error.message || "Something went wrong. Please try again.");
+      setStatusType("error");
       console.error(error);
     } finally {
       setLoading(false);
@@ -52,11 +64,9 @@ const Contact = () => {
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
               Contact <span className="text-indigo-400">Us</span>
             </h1>
-
             <p className="text-white/80 text-lg mt-2 mb-4">
               Let’s Build Something Intelligent.
             </p>
-
             <img
               src={contactHeroImage}
               alt="AI Assistant"
@@ -98,6 +108,13 @@ const Contact = () => {
               >
                 {loading ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Inline status message */}
+              {statusMessage && (
+                <p className={`mt-2 text-center ${statusType === "success" ? "text-green-400" : "text-red-400"}`}>
+                  {statusMessage}
+                </p>
+              )}
             </form>
           </div>
         </div>
