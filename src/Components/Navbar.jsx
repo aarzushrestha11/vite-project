@@ -5,8 +5,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(100);
   const location = useLocation();
+  const containerWidthRef = useRef(100);
+  const [, forceRender] = useState(0); // to trigger re-render when width changes
   const ticking = useRef(false);
 
   const navItems = [
@@ -21,9 +22,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   useEffect(() => {
-    const activeItem = navItems.find(
-      (item) => item.path === location.pathname
-    );
+    const activeItem = navItems.find((item) => item.path === location.pathname);
     if (activeItem) setActiveLink(activeItem.name);
   }, [location]);
 
@@ -43,10 +42,13 @@ const Navbar = () => {
         const adjustedScroll = Math.min(scrollY - 100, 300);
         let percentage = 100 - (adjustedScroll / 300) * 20;
         percentage = Math.max(80, Math.min(100, percentage));
-        newWidth = Math.round(percentage); // Round to prevent wobble
+        newWidth = Math.round(percentage);
       }
 
-      if (newWidth !== containerWidth) setContainerWidth(newWidth);
+      if (containerWidthRef.current !== newWidth) {
+        containerWidthRef.current = newWidth;
+        forceRender((prev) => prev + 1); // only re-render when width actually changes
+      }
 
       ticking.current = false;
     };
@@ -62,7 +64,9 @@ const Navbar = () => {
     updateNavbar();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [containerWidth]);
+  }, []); // <- no containerWidth dependency
+
+  const containerWidth = containerWidthRef.current;
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-gradient-to-br from-indigo-900 via-black to-purple-900">
@@ -70,7 +74,7 @@ const Navbar = () => {
         <div
           style={{
             width: `${containerWidth}%`,
-            transition: "width 0.3s ease", // only width
+            transition: "width 0.3s ease",
           }}
         >
           <div
@@ -106,9 +110,7 @@ const Navbar = () => {
                     {isScrolled ? "PLUTO" : "PLUTO ANALYTICS"}
                   </span>
                   {!isScrolled && (
-                    <p className="text-xs text-indigo-400 -mt-1">
-                      AI-Powered Intelligence
-                    </p>
+                    <p className="text-xs text-indigo-400 -mt-1">AI-Powered Intelligence</p>
                   )}
                 </div>
               </Link>
@@ -150,11 +152,7 @@ const Navbar = () => {
 
               {/* Desktop Button */}
               <div className="hidden lg:flex flex-shrink-0">
-                <a
-                  href="https://nhschat.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://nhschat.com/" target="_blank" rel="noopener noreferrer">
                   <button
                     className={`font-semibold transition-all duration-300 whitespace-nowrap ${
                       isScrolled
@@ -179,9 +177,7 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div
               className={`lg:hidden overflow-hidden transition-all duration-300 ${
-                isMenuOpen
-                  ? "max-h-screen opacity-100 mt-2"
-                  : "max-h-0 opacity-0"
+                isMenuOpen ? "max-h-screen opacity-100 mt-2" : "max-h-0 opacity-0"
               }`}
             >
               <div className="flex flex-col space-y-2 py-3 px-3 rounded-xl bg-indigo-900/80 backdrop-blur-md">
