@@ -1,11 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
- // Make sure Navbar.jsx is in the same folder
+// Make sure Navbar.jsx is in the same folder
 
 const useCases = [
   {
     title: "Sales Forecasting",
-    description: "Predict future sales trends and optimize inventory using AI insights.",
+    description:
+      "Predict future sales trends and optimize inventory using AI insights.",
     icon: (
       <svg
         className="w-8 h-8 text-indigo-400"
@@ -24,7 +24,8 @@ const useCases = [
   },
   {
     title: "Customer Segmentation",
-    description: "Group your customers intelligently to improve marketing strategies.",
+    description:
+      "Group your customers intelligently to improve marketing strategies.",
     icon: (
       <svg
         className="w-8 h-8 text-indigo-400"
@@ -43,7 +44,8 @@ const useCases = [
   },
   {
     title: "Fraud Detection",
-    description: "Detect anomalies and prevent fraudulent activities with AI monitoring.",
+    description:
+      "Detect anomalies and prevent fraudulent activities with AI monitoring.",
     icon: (
       <svg
         className="w-8 h-8 text-indigo-400"
@@ -64,9 +66,7 @@ const useCases = [
 
 const UseCases = () => {
   return (
-    <div className="bg-gradient-to-br from-indigo-900 via-black to-purple-900 text-white min-h-screen overflow-x-hidden">
-  
-
+    <div className="bg-linear-to-br from-indigo-900 via-black to-purple-900 text-white min-h-screen overflow-x-hidden">
       {/* ================= HERO ================= */}
       <section className="pt-20 pb-12 text-center">
         <div className="max-w-6xl mx-auto px-6">
@@ -74,7 +74,8 @@ const UseCases = () => {
             Our <span className="text-indigo-400">Use Cases</span>
           </h1>
           <p className="text-white/80 max-w-2xl mx-auto mb-8">
-            Explore real-world applications of AI that drive measurable business results.
+            Explore real-world applications of AI that drive measurable business
+            results.
           </p>
         </div>
       </section>
