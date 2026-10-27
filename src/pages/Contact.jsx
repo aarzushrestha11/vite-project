@@ -10,6 +10,9 @@ const Contact = () => {
     message: "",
   });
 
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("success");
+
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>
