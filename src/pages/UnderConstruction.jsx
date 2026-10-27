@@ -42,10 +42,10 @@ const UnderConstruction = () => {
 
           {/* Heading */}
           <h1 className="mb-6 text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl">
-            Something Amazing
-            <br />
-            Is <span className="text-indigo-400">Coming Soon</span>
-          </h1>
+  Page Under
+  <br />
+  <span className="text-indigo-400">Construction</span>
+</h1>
 
           {/* Description */}
           <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
