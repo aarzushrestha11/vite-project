@@ -83,7 +83,7 @@ const UnderConstruction = () => {
             className="inline-flex items-center justify-center gap-3 rounded-md border border-white/20 bg-transparent px-8 py-3.5 text-sm font-semibold text-white hover:border-white/50 hover:bg-white/5 transition-colors duration-300 w-full sm:w-auto"
           >
             Contact Our Team
-            <span className="opacity-70 group-hover:translate-x-1 transition-transform">/</span>
+            <span className="opacity-70 group-hover:translate-x-1 transition-transform"></span>
           </Link>
         </div>
 
