@@ -139,13 +139,7 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <div className="pt-4 mt-2 border-t border-white/10">
-              <a href="https://nhschat.com/" target="_blank" rel="noopener noreferrer" className="block w-full">
-                <button className="w-full bg-[#b19ffb] text-[#05050A] py-3 rounded-md font-semibold text-sm hover:bg-[#c5b7ff] transition-colors">
-                  ChatNHS
-                </button>
-              </a>
-            </div>
+          
           </div>
         </div>
         
