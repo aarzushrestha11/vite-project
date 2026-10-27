@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -14,6 +15,12 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [statusType, setStatusType] = useState("");
+
+  // --- FIX: Scroll to top on page load ---
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // ---------------------------------------
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,9 +102,10 @@ const Contact = () => {
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Visit the project directly to explore the live experience.
             </p>
-            <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors inline-flex items-center">
+            {/* Changed to Link component for routing */}
+            <Link to="/under-construction" className="text-sm font-medium text-gray-300 hover:text-white transition-colors inline-flex items-center">
               Visit ChatNHS /
-            </a>
+            </Link>
           </div>
 
         </div>
