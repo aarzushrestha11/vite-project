@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import contactHeroImage from "../assets/contactHeroImage.png";
 
 const Contact = () => {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  
+  // Kept your original state keys so it doesn't break your backend API
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,8 +12,8 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(""); // For inline messages
-  const [statusType, setStatusType] = useState(""); // "success" or "error"
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,125 +54,139 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#2b1c77] via-[#1a1140] to-[#3b1fa8] text-white">
+    <div className="bg-[#05050A] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#b19ffb] selection:text-black">
+      
+      <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        
+        {/* ================= LEFT COLUMN: TEXT CONTENT ================= */}
+        <div className="flex flex-col">
+          
+          {/* Main Header */}
+          <p className="text-[10px] font-bold tracking-[0.2em] text-gray-400 mb-6 uppercase">
+            Let's Connect
+          </p>
+          <h1 className="text-5xl md:text-7xl font-normal leading-[1.1] mb-6 tracking-tight">
+            What's on<br />
+            <span className="text-[#b19ffb]">your horizon?</span>
+          </h1>
+          <p className="text-gray-400 text-sm mb-16">
+            Tell us about a challenge, an idea, or something you would like to build.
+          </p>
 
-      {/* ================= TOP SECTION ================= */}
-      <section className="max-w-7xl mx-auto px-6 pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Secondary Section */}
+          <h2 className="text-3xl md:text-4xl font-normal leading-tight mb-4">
+            Every possibility starts<br />
+            with a conversation.
+          </h2>
+          <p className="text-gray-400 text-sm mb-10">
+            Share a little context about your business and what you're looking to change.
+          </p>
 
-          {/* LEFT CONTENT */}
-          <div className="flex flex-col">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              Contact <span className="text-indigo-400">Us</span>
-            </h1>
-            <p className="text-white/80 text-lg mt-2 mb-4">
-              Let’s Build Something Intelligent.
+          {/* Sub-sections with Dividers */}
+          <div className="border-t border-white/10 pt-6 mb-8">
+            <h3 className="text-xl font-normal mb-2 text-gray-100">Exploring AI?</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Start with your current workflow and the problem you want to solve.
             </p>
-            <img
-              src={contactHeroImage}
-              alt="AI Assistant"
-              className="w-64 md:w-72 mt-2 drop-shadow-[0_0_35px_rgba(99,102,241,0.6)]"
-            />
           </div>
 
-          {/* RIGHT FORM */}
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl">
-            <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="border-t border-white/10 pt-6">
+            <h3 className="text-xl font-normal mb-2 text-gray-100">Interested in ChatNHS?</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Visit the project directly to explore the live experience.
+            </p>
+            <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors inline-flex items-center">
+              Visit ChatNHS /
+            </a>
+          </div>
 
-              {["name", "email", "subject"].map((field) => (
-                <input
-                  key={field}
-                  type={field === "email" ? "email" : "text"}
-                  name={field}
-                  value={formData[field]}
-                  onChange={handleChange}
-                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-transparent border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              ))}
+        </div>
 
+        {/* ================= RIGHT COLUMN: FORM ================= */}
+        <div className="bg-[#0A0A11] border border-white/5 rounded-2xl p-8 md:p-10 w-full">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Name Input */}
+            <div>
+              <label htmlFor="name" className="block text-xs text-gray-300 mb-2">Your name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Alex Taylor"
+                required
+                className="w-full bg-[#05050A] border border-white/10 rounded-md px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#b19ffb] transition-colors"
+              />
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label htmlFor="email" className="block text-xs text-gray-300 mb-2">Work email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="alex@company.com"
+                required
+                className="w-full bg-[#05050A] border border-white/10 rounded-md px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#b19ffb] transition-colors"
+              />
+            </div>
+
+            {/* Subject/Interest Input */}
+            <div>
+              <label htmlFor="subject" className="block text-xs text-gray-300 mb-2">What are you interested in?</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="AI chatbots"
+                required
+                className="w-full bg-[#05050A] border border-white/10 rounded-md px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#b19ffb] transition-colors"
+              />
+            </div>
+
+            {/* Message Textarea */}
+            <div>
+              <label htmlFor="message" className="block text-xs text-gray-300 mb-2">A little about your project</label>
               <textarea
+                id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows="5"
-                placeholder="Message"
+                rows="4"
+                placeholder="What would you like to make possible?"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-transparent border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full bg-[#05050A] border border-white/10 rounded-md px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#b19ffb] transition-colors resize-none"
               />
+            </div>
 
+            {/* Status Message */}
+            {statusMessage && (
+              <p className={`text-sm ${statusType === "success" ? "text-green-400" : "text-red-400"}`}>
+                {statusMessage}
+              </p>
+            )}
+
+            {/* Submit Button */}
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 font-bold transition shadow-lg disabled:opacity-50"
+                className="bg-[#b19ffb] text-[#05050A] font-semibold text-sm px-6 py-3 rounded-md hover:bg-[#9d89f5] transition-colors disabled:opacity-50 inline-block"
               >
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? "Saving..." : "Save inquiry draft "}
               </button>
-
-              {/* Inline status message */}
-              {statusMessage && (
-                <p className={`mt-2 text-center ${statusType === "success" ? "text-green-400" : "text-red-400"}`}>
-                  {statusMessage}
-                </p>
-              )}
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= GET IN TOUCH ================= */}
-      <section className="max-w-7xl mx-auto px-6 mt-20 pb-24">
-        <h2 className="text-center text-3xl font-bold mb-10">Get in Touch</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-
-          {/* EMAIL */}
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 text-center shadow-lg flex flex-col items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-              <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
             </div>
-            <p className="font-semibold">info@plutoanalytics.com</p>
-          </div>
-
-          {/* PHONE */}
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 text-center shadow-lg flex flex-col items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-              <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </div>
-            <p className="font-semibold">+1 (123) 456-7890</p>
-          </div>
-
-          {/* ADDRESS */}
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 text-center shadow-lg flex flex-col items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-              <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <p className="font-semibold text-center">
-              123, AI Innovation Drive <br />
-              Suite 101, Tech City, NY, USA
-            </p>
-          </div>
-
+          </form>
         </div>
 
-        <div className="text-center">
-          <button className="px-10 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 font-bold shadow-xl transition">
-            Book a Free Consultation
-          </button>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };

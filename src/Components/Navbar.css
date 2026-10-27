@@ -1,0 +1,176 @@
+/* Navbar Container - Width Animation */
+.navbar-container {
+  width: 100%;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  will-change: width;
+}
+
+.navbar-container[data-scrolled="true"] {
+  width: 80%;
+}
+
+/* Navbar Inner - Style transitions */
+.navbar-inner {
+  padding: 1.25rem 1.25rem;
+  background: transparent;
+  border-radius: 1.5rem;
+  transition: 
+    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: padding, background, backdrop-filter;
+}
+
+.navbar-container[data-scrolled="true"] .navbar-inner {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Logo Box */
+.logo-box {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: linear-gradient(135deg, #4f46e5, #6d28d9);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  transition: 
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: width, height;
+}
+
+.navbar-container[data-scrolled="true"] .logo-box {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+/* Logo Text */
+.logo-text {
+  font-size: 1.25rem;
+  transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-container[data-scrolled="true"] .logo-text {
+  font-size: 1.125rem;
+}
+
+/* Brand Text */
+.brand-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: font-size;
+}
+
+.navbar-container[data-scrolled="true"] .brand-text {
+  font-size: 1.125rem;
+}
+
+/* Tagline */
+.tagline {
+  font-size: 0.75rem;
+  color: #818cf8;
+  margin-top: -0.25rem;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), display 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.navbar-container[data-scrolled="true"] .tagline {
+  opacity: 0;
+  display: none;
+}
+
+/* Nav Links */
+.nav-links {
+  transition: gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.navbar-container[data-scrolled="true"] .nav-links {
+  gap: 1rem;
+}
+
+/* Nav Link */
+.nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+/* Link Underline */
+.link-underline {
+  height: 0.25rem;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.navbar-container[data-scrolled="true"] .link-underline {
+  height: 0.125rem;
+}
+
+/* ChatNHS Button */
+.chatnhs-btn {
+  padding: 0.5rem 1rem;
+  background: #818cf8;
+  border: 2px solid #a855f7;
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: auto;
+}
+
+.chatnhs-btn:hover {
+  background: #6366f1;
+}
+
+.navbar-container[data-scrolled="true"] .chatnhs-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  transition: 
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
